@@ -18,7 +18,7 @@ python wrangleSotu.py
 ```
 The above command will create a 'html_files' folder with the html files of the speeches and a separate 'sotu.npy' will be created containing the processed data for easy access. The data is in a pandas DataFrame format containing columns 'year', 'month', 'day', 'president', 'title', and 'text'.
 
-4. You can open the "sotu.csv" file by using the pandas module in Python.
+4. You can open the "sotu.pkl" file by using the pandas module in Python.
 ```python
 import pandas as pd
 sotu_df = pd.read_pickle('sotu.pkl')
