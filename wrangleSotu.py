@@ -21,7 +21,7 @@ print()
 # save raw html of sotu links list
 sotu_list_url = 'https://www.presidency.ucsb.edu/documents/presidential-documents-archive-guidebook/annual-messages-congress-the-state-the-union'
 sotu_table = st.download_sotu(sotu_list_url)
-sotu_table.to_csv('sotu.csv',encoding='utf-8')
+sotu_table.to_pickle('sotu.pkl')
 end = time.time()
 print('Computing time: '+str(round(end-start,2))+' seconds.')
 print()

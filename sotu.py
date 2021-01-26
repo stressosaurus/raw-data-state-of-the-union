@@ -20,7 +20,7 @@ def download_sotu(url):
         urllib.request.urlretrieve(url,directory_html+'sotu_table.html')
     except:
         print('Error: URL does not exist!')
-    raw_html = open(directory_html+'sotu_table.html').read()
+    raw_html = open(directory_html+'sotu_table.html',encoding='utf-8').read()
     html = BeautifulSoup(raw_html, 'html.parser')
     table_html = html.select('table')
     links = {}
@@ -64,7 +64,7 @@ def download_sotu(url):
     print('Processing urls ...')
     for i in tqdm(label_all):
         try:
-            raw_html_page = open(directory_html+i+'.html').read()
+            raw_html_page = open(directory_html+i+'.html',encoding='utf-8').read()
             html = BeautifulSoup(raw_html_page, 'html.parser')
             divs = html.select('div')
             for i in divs:
@@ -93,7 +93,7 @@ def download_sotu(url):
                         paragraphs = i.select('p')
                         paragraphs_all = []
                         for p in paragraphs:
-                            paragraphs_all.append(p.text)
+                            paragraphs_all.append(p.text.replace('\t',' ').replace('\n',' '))
                         sotu.append(' '.join(paragraphs_all))
         except:
             pass
@@ -110,6 +110,6 @@ def download_sotu(url):
     table['president'] = president
     table['title'] = sotu_title
     table['text'] = sotu
-    table = pd.DataFrame(table,index=table['year']).sort_values(by=['year','month','day'])
+    table = pd.DataFrame(table).sort_values(by=['year','month','day'],ascending=False)
 
     return table
